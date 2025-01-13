@@ -76,40 +76,41 @@
                     }
                 }
             }
-        },
-        {
-            "apiVersion": "2021-04-01",
-            "name": "[concat(variables('cdnEndpointName'), '-', parameters('utcValue'))]",
-            "type": "Microsoft.Resources/deployments",
-            "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
-            "dependsOn": [
-                "[variables('resourceGroupName')]"
-            ],
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[concat(variables('deploymentUrlBase'),'cdn-endpoint.json')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "cdnProfileName": {
-                        "value": "[parameters('sharedCdnProfileName')]"
-                    },
-                    "cdnEndPointName": {
-                        "value": "[variables('cdnEndpointName')]"
-                    },
-                    "originHostName": {
-                        "value": "[replace(replace(replace(reference(concat(variables('storageAccountName'), '-', parameters('utcValue'))).outputs.storagePrimaryEndpointsWeb.value, 'https://', ''),'-', '.'), '/', '')]"
-                    },
-                    "customDomainName": {
-                        "value": "[parameters('cdnCustomHostName')]"
-                    },
-                    "isHttpAllowed": {
-                        "value": false
-                    }
-                }
-            }
         }
+        // ,
+        // {
+        //     "apiVersion": "2021-04-01",
+        //     "name": "[concat(variables('cdnEndpointName'), '-', parameters('utcValue'))]",
+        //     "type": "Microsoft.Resources/deployments",
+        //     "resourceGroup": "[parameters('sharedEnvResourceGroup')]",
+        //     "dependsOn": [
+        //         "[variables('resourceGroupName')]"
+        //     ],
+        //     "properties": {
+        //         "mode": "Incremental",
+        //         "templateLink": {
+        //             "uri": "[concat(variables('deploymentUrlBase'),'cdn-endpoint.json')]",
+        //             "contentVersion": "1.0.0.0"
+        //         },
+        //         "parameters": {
+        //             "cdnProfileName": {
+        //                 "value": "[parameters('sharedCdnProfileName')]"
+        //             },
+        //             "cdnEndPointName": {
+        //                 "value": "[variables('cdnEndpointName')]"
+        //             },
+        //             "originHostName": {
+        //                 "value": "[replace(replace(replace(reference(concat(variables('storageAccountName'), '-', parameters('utcValue'))).outputs.storagePrimaryEndpointsWeb.value, 'https://', ''),'-', '.'), '/', '')]"
+        //             },
+        //             "customDomainName": {
+        //                 "value": "[parameters('cdnCustomHostName')]"
+        //             },
+        //             "isHttpAllowed": {
+        //                 "value": false
+        //             }
+        //         }
+        //     }
+        // }
     ],
     "outputs": {
         "StorageAccountName": {
